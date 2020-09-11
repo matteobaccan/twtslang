@@ -2,7 +2,7 @@
  * TWT Slang 1.10
  *
  * Copyright 2000 Matteo Baccan <mbaccan@planetisa.com>
- * www - http://www.infomedia.it/artic/Baccan
+ * www - https://www.baccan.it
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
