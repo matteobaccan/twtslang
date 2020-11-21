@@ -1,7 +1,7 @@
 /*
- * TWT Slang 1.10
+ * TWT Slang 2.00
  *
- * Copyright 2000 Matteo Baccan <mbaccan@planetisa.com>
+ * Copyright 2000 Matteo Baccan <matteo@baccan.it>
  * www - https://www.baccan.it
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,20 +22,23 @@
  */
 
 /*
-  ÉÍÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÍ»
-  ³ş  ____       __                                                       ş³
-  ³  /    \____ /  \                                                       ³
-  ³  \____/  __/    \       ________    ________             TWT           ³
-  ³    |\ | |  | /\ |       \__  __ \/\/ __  __/                           ³
-  ³    | ||  ==| \/ |          \ \ \    / / /               Slang          ³
-  ³    | || |  \    /  of       \ \ \/\/ / /                               ³
-  ³    | || \__ \__/             \/      \/               Converter        ³
-  ³     \| \___\             The WoNdERfuL TeaM                            ³
-  ³ş                                                                      ş³
-  ÈÍÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÍ¼
-  v1.02 Added some chars by úÄÍşIANşÍÄú
-  v1.03 Some little changes úÄÍşTEOşÍÄú
+  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+  ï¿½  ____       __                                                   ï¿½
+  ï¿½ /    \____ /  \                                                  ï¿½
+  ï¿½ \____/  __/    \       ________    ________             TWT      ï¿½
+  ï¿½   |\ | |  | /\ |       \__  __ \/\/ __  __/                      ï¿½
+  ï¿½   | ||  ==| \/ |          \ \ \    / / /               Slang     ï¿½
+  ï¿½   | || |  \    /  of       \ \ \/\/ / /                          ï¿½
+  ï¿½   | || \__ \__/             \/      \/               Converter   ï¿½
+  ï¿½    \| \___\             The WoNdERfuL TeaM                       ï¿½
+  ï¿½                                                                  ï¿½
+  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
+  v1.02 Added some chars by ï¿½ï¿½ï¿½ï¿½IANï¿½ï¿½ï¿½ï¿½
+  v1.03 Some little changes ï¿½ï¿½ï¿½ï¿½TEOï¿½ï¿½ï¿½ï¿½
   v1.10 Source released
+  v2.00 Github Revision
+
 */
 
 #include <stdio.h>
@@ -54,7 +57,7 @@ void dfPrintOpenError( const char * InFile ); // open error
 void dfPrintExist( const char * OutFile );    // file Exist
 void dfConvert( char * Buffer, int Count );  // convert string
 
-void main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
    FILE *InFile, *OutFile;     // file declaration
    char *RBuffer;              // Read Buffer
@@ -82,14 +85,14 @@ void main(int argc, char *argv[])
       exit( CV_EXITOPEN );
    }// endif
 
-   printf("\n ş Reading %s\n", argv[1] );          // Convert
+   printf("\n * Reading %s\n", argv[1] );          // Convert
    RBuffer = malloc( BUFFER_LEN );
    while( (CharRead = fread(RBuffer, sizeof(char), BUFFER_LEN, InFile )) >0 ){
       dfConvert( RBuffer, CharRead );
       fwrite( RBuffer, sizeof(char), CharRead, OutFile );
    }// endwhile
    free( RBuffer );
-   printf("\n ş OK \n" );
+   printf("\n * OK \n" );
 
    fclose( InFile );                               // Close File
    fclose( OutFile );
@@ -98,7 +101,7 @@ void main(int argc, char *argv[])
 
 
 void dfPrintInfo(){
-   printf("\nTWTSlang        Converter file ASCII in TWT Slang       Version  1.10 \n");
+   printf("\nTWTSlang        Converter file ASCII in TWT Slang       Version  2.00  \n");
    printf("Copyright 1993-1996 The Wonderful Team.    All Rights Reserved.         \n");
    printf("                                                                        \n");
    printf("Usage: TWTSlang <InFile> <OutFile>                                      \n");
@@ -107,27 +110,25 @@ void dfPrintInfo(){
    printf("                                                                        \n");
    printf(" OutFile = File 2 save                                                  \n");
    printf("                                                                        \n");
-   printf("                     şÄÄÍÍ çîå ç×î SåŸçWizàâd ÍÍÄÄş                     \n");
+   printf("                       ---TeO tHe SoFtWiZaRd-->                         \n");
 }// end of print info
 
 void dfPrintLogo(){
    printf("\n");
-   printf("ÉÍÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÍ»\n");
-   printf("³ş                                                                      ş³\n");
-   printf("³  The Wonderful Team                                   Slang Converter  ³\n");
-   printf("³ş                                 1.10                                 ş³\n");
-   printf("ÈÍÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÍ¼\n");
-   printf("                     şÄÄÍÍ çîå ç×î SåŸçWizàâd ÍÍÄÄş                       \n");
+   printf("+----------------------------------------------------------------------+\n");
+   printf("| The Wonderful Team                                   Slang Converter |\n");
+   printf("|                                2.00                                  |\n");
+   printf("+----------------------------------------------------------------------+\n");
 }// end of print logo
 
 
 void dfPrintOpenError( const char * InFile ){
-   printf("\n ş Error opening file %s\n", InFile );
+   printf("\n * Error opening file %s\n", InFile );
 }// end of print error
 
 
 void dfPrintExist( const char * OutFile ){
-   printf("\n ş Output file %s Exist \n", OutFile );
+   printf("\n * Output file %s Exist \n", OutFile );
 }// end of print Exist
 
 
@@ -137,97 +138,97 @@ void dfConvert( char * Buffer, int Count ){
    while( Count-- > 0 ){
       switch( Buffer[Count] ){
       case 'a' :
-         c2Put = 'à';
+         c2Put = '4';
          break;
       case 'A' :
-         c2Put = '’';
+         c2Put = '4';
          break;
       case 'b' :
       case 'B' :
-         c2Put = 'á';
+         c2Put = '8';
          break;
       case 'c' :
-         c2Put = '‡';
+         c2Put = '<';
          break;
       case 'C' :
          c2Put = '<';
          break;
       case 'd' :
-         c2Put = 'ë';
+         c2Put = 'd';
          break;
       case 'e' :
-         c2Put = 'î';
+         c2Put = '3';
          break;
       case 'E' :
-         c2Put = 'ä';
+         c2Put = '3';
          break;
       case 'f' :
-         c2Put = 'Ÿ';
+         c2Put = 'f';
          break;
       case 'F' :
-         c2Put = 'Õ';
+         c2Put = 'f';
          break;
       case 'h' :
       case 'H' :
-         c2Put = '×';
+         c2Put = 'h';
          break;
       case 'i' :
-         c2Put = '­';
+         c2Put = '1';
          break;
       case 'I' :
-         c2Put = '³';
+         c2Put = '1';
          break;
       case 'j' :
       case 'J' :
-         c2Put = 'õ';
+         c2Put = 'j';
          break;
       case 'l' :
-         c2Put = '';
+         c2Put = 'l';
          break;
       case 'L' :
-         c2Put = 'œ';
+         c2Put = 'l';
          break;
       case 'n' :
-         c2Put = 'ã';
+         c2Put = 'n';
          break;
       case 'N' :
-         c2Put = 'ï';
+         c2Put = 'n';
          break;
       case 'o' :
-         c2Put = 'å';
+         c2Put = '0';
          break;
       case 'O' :
-         c2Put = 'é';
+         c2Put = '0';
          break;
       case 'p' :
       case 'P' :
-         c2Put = 'ô';
+         c2Put = 'p';
          break;
       case 'q' :
          c2Put = '';
          break;
       case 'r' :
-         c2Put = 'â';
+         c2Put = 'q';
          break;
       case 'R' :
-         c2Put = '';
+         c2Put = 'r';
          break;
       case 'S' :
          c2Put = '$';
          break;
       case 't' :
       case 'T' :
-         c2Put = 'ç';
+         c2Put = 't';
          break;
       case 'v' :
       case 'V' :
-         c2Put = 'û';
+         c2Put = 'v';
          break;
       case 'Y' :
-         c2Put = '';
+         c2Put = 'y';
          break;
       case 'x' :
-         c2Put = '%';
+         c2Put = 'x';
          break;
       default:
          c2Put = Buffer[Count];
